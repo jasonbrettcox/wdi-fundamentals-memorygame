@@ -38,14 +38,14 @@ function checkForMatch(){
 
 	alert ("It's a match!");
 	 }else {
-		alert ("Get a job you loser");
+		alert ("Get a job, you loser");
 	}
 }
 
 
-function userFlipped(cardId) {
+function flipCard() {
 	
-	console.log(cardId);
+	var cardId = this.getAttribute('data-id');
 
 	// if (cardOne === cardsInPlay[0]){
 	// 	console.log("user flipped queen");
@@ -55,20 +55,31 @@ function userFlipped(cardId) {
 	// }
 	cardsInPlay.push(cards[cardId]);
 
+	this.setAttribute("src", cards[cardId].path);
 
 	if (cardsInPlay.length === 2){
-	console.log("There are two cards in play")
+	// console.log("There are two cards in play")
 	checkForMatch();
 	}
-	 else {console.log("Pick another card");
-	}
+	//  else {console.log("Pick another card");
+	// }
 	
 }
 
-userFlipped(0);
 
 
-userFlipped(1);
+
+var createBoard= function(){
+	for (var i = 0; i < cards.length; i++) {
+		var cardElement = document.createElement('img');
+
+	cardElement.setAttribute("src", "images/back.png");
+	cardElement.setAttribute("data-id", i);
+	cardElement.addEventListener("click", flipCard);
+	document.getElementById('game-board').appendChild(cardElement);
+}
+}
+createBoard();
 
 
 
